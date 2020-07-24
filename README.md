@@ -39,10 +39,8 @@ After it prints out the following info, the local database is ready to use
 
 ## What does the script do?
 - The script iterates all files in `advertiser` collection and add every files (original creative) to a new collection called `allCreatives`
-
-## Data object sample in `allCreative` collection
+  original creatives from `advertiser` collection stored in `allCreatives` in the following format
 ```dash
-original creatives from `advertiser` collection stored in `allCreatives` in the following format
 {
 	"_id" : ObjectId("5f1a666a1c202f0d934dbfcf"),
 	"creativeId" : "5909c6fd6bdc2a00115c2a75",
@@ -54,9 +52,9 @@ original creatives from `advertiser` collection stored in `allCreatives` in the 
 	"timeStamp" : "2019-12-03::12-02"
 }
 ```
-- After the above process, the script iterates all creatives in `creatives` collection and add every creative to `allCreative` 
+- After the above process, the script iterates all creatives in `creatives` collection and add every creative to `allCreative`
+  creatives from `creatives` collection (creatives sent to Theorem) stored in `allCreative` in the following format
 ```dash
-creatives from `creatives` collection (creatives sent to Theorem) stored in `allCreative` in the following format
 {
 	"_id" : ObjectId("5f1a666a1c202f0d934dbfcf"),
 	"creativeId" : "5909c6fd6bdc2a00115c2a75",
