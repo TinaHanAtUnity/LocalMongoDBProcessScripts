@@ -38,8 +38,8 @@ After it prints out the following info, the local database is ready to use
 <img width="906" alt="Screen Shot 2020-07-23 at 9 51 50 PM" src="https://user-images.githubusercontent.com/41215433/88361930-98dd0500-cd2f-11ea-98c8-a83976c6a562.png">
 
 ## What does the script do?
-- The script iterates all files in `advertiser` collection and add every files (original creative) to a new collection called `allCreatives`
-  original creatives from `advertiser` collection stored in `allCreatives` in the following format
+- The script iterates all files in `advertiser` collection and add every files (original creative) to a new collection called `allCreatives`.
+  Original creatives from `advertiser` collection stored in `allCreatives` in the following format
 ```dash
 {
 	"_id" : ObjectId("5f1a666a1c202f0d934dbfcf"),
@@ -53,7 +53,7 @@ After it prints out the following info, the local database is ready to use
 }
 ```
 - After the above process, the script iterates all creatives in `creatives` collection and add every creative to `allCreative`
-  creatives from `creatives` collection (creatives sent to Theorem) stored in `allCreative` in the following format
+  Creatives from `creatives` collection stored in `allCreative` in the following format
 ```dash
 {
 	"_id" : ObjectId("5f1a666a1c202f0d934dbfcf"),
