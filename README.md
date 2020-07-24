@@ -33,5 +33,6 @@ After local mongoDB is good to go, using python3 to run the python script
 ```dash
 python3 xxxx.py
 ```
-there will be a progress bar to show how much it has done for now, usually it will take 10 minutes to finish.
-
+There will be a progress bar to show how much it has done for now, usually it will take 10 minutes to finish.
+After it prints out the following info, the local database is ready to use
+<img width="906" alt="Screen Shot 2020-07-23 at 9 51 50 PM" src="https://user-images.githubusercontent.com/41215433/88361930-98dd0500-cd2f-11ea-98c8-a83976c6a562.png">
