@@ -16,9 +16,10 @@ def establishLocalMongo():
     creatives = db['creatives']
     advertiser = db['advertiser']
     allCreatives = db['allCreatives']
-    return creatives, advertiser, allCreatives
+    validChecksum = db['validChecksum']
+    return creatives, advertiser, allCreatives, validChecksum
 
-creatives, advertiser, allCreatives = establishLocalMongo()
+creatives, advertiser, allCreatives, validChecksum = establishLocalMongo()
 
 # add all the files in advertiser collection to allCreatives collection
 items = []
@@ -36,9 +37,6 @@ for i, campaign in enumerate(advertiser.find()):
         for creative in files['files']:
             item = {'creativeId': creative['_id'], 'checksum': creative['checksum'], 'status': status, 'moderationStatus': moderationStatus, 'organizationId': orgId, 'gameId': gameId, 'timeStamp': timeStamp}
             items.append(item)
-    if (i % 50000 == 0) :
-        allCreatives.insert_many(items)
-        items = []
 
     printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
@@ -67,12 +65,20 @@ for i, creative in enumerate(creatives.find()):
         decision = ''
     item = {'creativeId': creative['creativeId'], 'status': status, 'decision': decision, 'checksum': checksum, 'organizationId': orgId, 'gameId': gameId}
     items.append(item)
-    if (i % 50000 == 0) :
-        allCreatives.insert_many(items)
-        items = []
-
     printProgressBar(i + 1 + l_advertiser, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
 allCreatives.insert_many(items)
+print("writing local database.....")
+
+#extracting non empty checksum creatives from allCreatives
+nonEmptyChecksums = []
+l = allCreatives.estimated_document_count()
+printProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+for (i, creative) in enumerate(allCreatives.find()):
+    if creative['checksum'] != "":
+        nonEmptyChecksums.append(creative)
+    printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+
+validChecksum.insert_many(nonEmptyChecksums)
 
 print('Done. Now you can query the "allCreatives" collection using checksum or creativeId')
