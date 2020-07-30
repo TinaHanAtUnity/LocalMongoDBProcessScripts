@@ -3,11 +3,10 @@ from pymongo import MongoClient
 def establishLocalMongo():
     client = MongoClient('mongodb://localhost:27017', authSource='creatives')
     db = client['creatives']
-    allCreatives = db['allCreatives']
     validChecksum = db['validChecksum']
-    return allCreatives, validChecksum
+    return validChecksum
 
-allCreatives, validChecksum = establishLocalMongo()
+validChecksum = establishLocalMongo()
 
 orgIds = set() 
 blockedChecksums = set()

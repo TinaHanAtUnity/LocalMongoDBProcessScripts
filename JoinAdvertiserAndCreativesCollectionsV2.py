@@ -15,12 +15,12 @@ creatives, advertiser, allCreatives, validChecksum = establishLocalMongo()
 # add all the files in advertiser collection to allCreatives collection
 items = []
 for i, campaign in enumerate(advertiser.find()):
-    orgId = campaign['organizationId']
+    orgId = str(campaign['organizationId'])
     gameId = campaign['gameId']
     timeStamp = campaign['updatedAt'].strftime('%Y-%m-%d::%H-%M')
     for files in campaign['creatives']:
-        status = files['status']
-        moderationStatus = files['moderation']['status']
+        status = str(files['status'])
+        moderationStatus = str(files['moderation']['status'])
         updatedAt = files['updatedAt'].strftime('%Y-%m-%d::%H-%M')
         createdAt = files['createdAt'].strftime('%Y-%m-%d::%H-%M')
         for creative in files['files']:
@@ -28,7 +28,7 @@ for i, campaign in enumerate(advertiser.find()):
                 checksum = creative['checksum']
             except:
                 checksum = ''
-            item = {'creativeId': creative['_id'], 'checksum': checksum, 'status': status, 'moderationStatus': moderationStatus, 'organizationId': orgId, 'gameId': gameId, 'createdAt': createdAt, 'updatedAt': updatedAt}
+            item = {'creativeId': str(creative['_id']), 'checksum': checksum, 'status': status, 'moderationStatus': moderationStatus, 'organizationId': orgId, 'gameId': gameId, 'createdAt': createdAt, 'updatedAt': updatedAt}
             items.append(item)
 
 allCreatives.insert_many(items)
